@@ -1,5 +1,24 @@
 <?php
 
+include 'database.php';
+
+
+function createMeme($line1, $line2) {
+    
+    $dbConn = getDatabaseConnection(); 
+
+    $sql = "INSERT INTO `all_memes` (`id`, `line1`, `line2`) VALUES (NULL, '$line1', '$line2');"; 
+    $statement = $dbConn->prepare($sql); 
+    
+    $statement->execute(); 
+}
+
+
+if (isset($_POST['line1']) && isset($_POST['line2'])) {
+  createMeme($_POST['line1'], $_POST['line2']); 
+}
+
+
 
 ?>
 
