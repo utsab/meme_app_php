@@ -13,5 +13,9 @@
         Line 2: <input type="text" name="line2"></input> <br/>
         <input type="submit"></input>
     </form>
+    
+    <div>
+      <a href="./meme.php">View all memes</a>
+    </div>
   </body>
 </html>
