@@ -80,17 +80,25 @@ if (isset($_POST['line1']) && isset($_POST['line2'])) {
     </style>
   </head>
   <body>
-    <h1>Your Meme</h1>
-    <!--The image needs to be rendered for each new meme
-    so set the div's background-image property inline -->
-    <div class="meme-div" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg);">
-      <h2 class="line1"><?= $_POST['line1'] ?> </h2>
-      <h2 class="line2"><?= $_POST['line2'] ?></h2>
-    </div>
+    
+    <?php 
+      if (isset($_POST['line1']) && isset($_POST['line2'])) {
+    ?>
+        <h1>Your Meme</h1>
+        <div class="meme-div" style="background-image:url(https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg);">
+          <h2 class="line1"><?= $_POST['line1'] ?> </h2>
+          <h2 class="line2"><?= $_POST['line2'] ?></h2>
+        </div>
+    <?php
+      }
+    ?>
+    
     
     <h1>All memes</h1>
     <div class="memes-container">
       <?php displayMemes(); ?>
     </div>
+        
+   
   </body>
 </html>
