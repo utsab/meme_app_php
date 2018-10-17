@@ -51,14 +51,12 @@ function createMeme($line1, $line2, $memeType) {
 function displayMemes() {
     $dbConn = getDatabaseConnection(); 
     
+    $sql = "SELECT * from all_memes WHERE 1"; 
+    
     if(isset($_POST['search'])) {
       // query the databse for any records that match this search
-      $sql = "SELECT * from all_memes WHERE line1 LIKE '%{$_POST['search']}%' OR line2 LIKE '%{$_POST['search']}%'";
-    
-      echo "********* sql: $sql <br/>"; 
-    } else {
-      $sql = "SELECT * from all_memes";  
-    }
+      $sql .= " AND (line1 LIKE '%{$_POST['search']}%' OR line2 LIKE '%{$_POST['search']}%')";
+    } 
 
     $statement = $dbConn->prepare($sql); 
     
@@ -141,6 +139,12 @@ if (isset($_POST['line1']) && isset($_POST['line2'])) {
     <h1>All memes</h1>
     <form method="post" action="meme.php">
         Search:  <input type="text" name="search"></input> 
+        Meme type: <select name="meme-type">
+          <option value="college-grad">Happy College Grad</option>
+          <option value="thinking-ape">Deep Thought Monkey</option>
+          <option value="coding">Learning to Code</option>
+          <option value="old-class">Old Classroom</option>
+        </select>
         <input type="submit"></input>
     </form>
     <div class="memes-container">
