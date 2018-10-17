@@ -11,11 +11,19 @@
     <form method="post" action="meme.php">
         Line 1: <input type="text" name="line1"></input> <br/>
         Line 2: <input type="text" name="line2"></input> <br/>
+        Meme Type:
+        <select name="meme-type">
+          <option value="college-grad">Happy College Grad</option>
+          <option value="thinking-ape">Deep Thought Monkey</option>
+          <option value="coding">Learning to Code</option>
+          <option value="old-class">Old Classroom</option>
+        </select>
+
         <input type="submit"></input>
     </form>
     
-    <div>
-      <a href="./meme.php">View all memes</a>
-    </div>
+    <a href="./meme.php">View all memes</a>
+    
+    
   </body>
 </html>

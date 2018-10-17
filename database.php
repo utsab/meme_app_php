@@ -1,11 +1,12 @@
 <?php
+
 // connect to our mysql database server
 
 function getDatabaseConnection() {
     $host = "localhost";
-    $username = "root";
-    $password = "cst336";
-    $dbname = "memes"; 
+    $username = "utsab";
+    $password = "cst336"; // best practice: define this in a separte file
+    $dbname = "meme_lab"; 
     
     // Create connection
     $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -14,9 +15,8 @@ function getDatabaseConnection() {
     return $dbConn; 
 }
 
-
+// temporary test code
 //$dbConn = getDatabaseConnection(); 
-
 
 
 ?>
