@@ -57,6 +57,10 @@ function displayMemes() {
       // query the databse for any records that match this search
       $sql .= " AND (line1 LIKE '%{$_POST['search']}%' OR line2 LIKE '%{$_POST['search']}%')";
     } 
+    
+    if(isset($_POST['meme-type'])) {
+      $sql .= " AND meme_type = '{$_POST['meme-type']}'"; 
+    }
 
     $statement = $dbConn->prepare($sql); 
     
