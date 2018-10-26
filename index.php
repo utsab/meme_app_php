@@ -1,4 +1,5 @@
 <?php
+include 'database.php';
 
 
 function displayRandomMeme() {
@@ -31,7 +32,7 @@ function displayRandomMeme() {
   </head>
   <body>
     <h1>Meme Generator</h1>
-    <img height="100px" width="150px" src="https://www.publicdomainpictures.net/pictures/90000/velka/alpaca-chewing.jpg" alt="a-chewing-alpaca">
+    <?php displayRandomMeme(); ?>
     <h2>Welcome to my Meme Generator!</h2>
     
     <form method="post" action="meme.php">
