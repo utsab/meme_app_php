@@ -1,38 +1,13 @@
-<?php
-include 'database.php';
 
-
-function displayRandomMeme() {
-    $dbConn = getDatabaseConnection(); 
-    
-    $sql = "SELECT * from all_memes ORDER BY RAND() LIMIT 1"; 
-    
-  
-    $statement = $dbConn->prepare($sql); 
-    
-    $statement->execute(); 
-    $records = $statement->fetchAll(); 
-    
-    $meme = $records[0]; 
-    
-    echo  '<div class="meme-div" style="background-image:url('. $meme['meme_url'] .')">'; 
-    echo  '<h2 class="line1">' . $meme["line1"] . '</h2>'; 
-    echo  '<h2 class="line2">' . $meme["line2"] . '</h2>'; 
-    echo  '</div>'; 
-    
-} 
-
-?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <title>Welcome</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <h1>Meme Generator</h1>
-    <?php displayRandomMeme(); ?>
+    <img height="100px" width="150px" src="https://www.publicdomainpictures.net/pictures/90000/velka/alpaca-chewing.jpg" alt="a-chewing-alpaca">
     <h2>Welcome to my Meme Generator!</h2>
     
     <form method="post" action="meme.php">
