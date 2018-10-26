@@ -2,6 +2,10 @@
 include 'database.php';
 $dbConn = getDatabaseConnection();
 
+echo "SERVER: <br/>"; 
+print_r($_SERVER); 
+echo "<br/>"; 
+
 // Fetch the category_id from the categories table for the chosen meme type
 
 function getCategoryID($memeType) {
