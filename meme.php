@@ -23,7 +23,10 @@ function createMeme($line1, $line2, $memeType) {
     // construct the proper SQL INSERT statement
     $dbConn = getDatabaseConnection(); 
 
-    $sql = "INSERT INTO `all_memes` (`id`, `line1`, `line2`, `meme_type`, `meme_url`) VALUES (NULL, '$line1', '$line2', '$memeType', '$memeURL');"; 
+    $sql = "INSERT INTO `all_memes` 
+      (`id`, `line1`, `line2`, `meme_type`, `meme_url`, `create_date`) 
+      VALUES 
+      (NULL, '$line1', '$line2', '$memeType', '$memeURL', NOW());"; 
     
     $statement = $dbConn->prepare($sql); 
     $result = $statement->execute(); 
@@ -58,7 +61,7 @@ function displayMemes() {
       $sql .= " AND (line1 LIKE '%{$_POST['search']}%' OR line2 LIKE '%{$_POST['search']}%')";
     } 
     
-    if(isset($_POST['meme-type'])) {
+    if(isset($_POST['meme-type']) && !empty($_POST['meme-type'])) {
       $sql .= " AND meme_type = '{$_POST['meme-type']}'"; 
     }
 
@@ -89,45 +92,7 @@ if (isset($_POST['line1']) && isset($_POST['line2'])) {
 <html>
   <head>
     <title>A Meme</title>
-    <style>
-      .meme-div{
-        width: 450px;
-        height: 450px;
-        background-size: cover;
-        text-align: center;
-        position: relative;
-        font-size: 18px;
-      }
-      
-      .memes-container .meme-div{
-        width: 150px;
-        height:150px;
-        float: left;
-        margin: 10px 20px;
-      }
-      
-      .memes-container .meme-div h2 {
-        font-size: 18px;
-      }
-      
-      
-      h2 {
-        position: absolute;
-        left: 0;
-        right: 0;
-        margin: 15px 0;
-        padding: 0 5px;
-        font-family: impact;
-        color: white;
-        text-shadow: 1px 1px black;
-      }
-      .line1 {
-         top: 0;
-       }
-      .line2 {
-         bottom: 0;
-       }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <?php if ($memeObj) {  ?>
@@ -144,11 +109,16 @@ if (isset($_POST['line1']) && isset($_POST['line2'])) {
     <form method="post" action="meme.php">
         Search:  <input type="text" name="search"></input> 
         Meme type: <select name="meme-type">
+          <option value=""></option>
           <option value="college-grad">Happy College Grad</option>
           <option value="thinking-ape">Deep Thought Monkey</option>
           <option value="coding">Learning to Code</option>
           <option value="old-class">Old Classroom</option>
-        </select>
+        </select> <br/>
+        ORDER: 
+        <input type="radio"  name="order" value="newest-first"> Newest first
+        <input type="radio"  name="order" value="oldest-first"> Oldest first
+        <br/>
         <input type="submit"></input>
     </form>
     <div class="memes-container">
