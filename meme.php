@@ -1,44 +1,65 @@
 <?php
 include 'database.php';
+$dbConn = getDatabaseConnection();
 
+// Fetch the category_id from the categories table for the chosen meme type
+function getCategoryID($memeType) {
+  global $dbConn; 
+  
+  $sql = "SELECT category_id from categories WHERE meme_type = '$memeType'";
+     
+  $statement = $dbConn->prepare($sql); 
+  
+  $statement->execute(); 
+  $records = $statement->fetchAll(); 
+  $categoryID = $records[0]['category_id']; 
+  
+  echo "categoryID: $categoryID <br/>"; 
+  return $categoryID; 
+}
 
-function createMeme($line1, $line2, $memeType) {
-    // map each meme type to the appropriate url
-    
-    if ($memeType == 'college-grad') {
-      $memeURL = 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinusPaulingGraduation1922.jpg'; 
-    } elseif ($memeType == 'thinking-ape') {
-      $memeURL = 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Deep_in_thought.jpg'
-; 
-    } elseif ($memeType == 'coding') {
-      $memeURL = 'https://upload.wikimedia.org/wikipedia/commons/b/b9/Typing_computer_screen_reflection.jpg' ; 
-    } elseif ($memeType == 'old-class') {
-      $memeURL = 'https://upload.wikimedia.org/wikipedia/commons/4/47/StateLibQld_1_100348.jpg';
-    }
-    
-   
-    
-    // construct the proper SQL INSERT statement
-    $dbConn = getDatabaseConnection(); 
+// INSERT the new meme into the all_memes table
 
+function insertMeme($line1, $line2, $categoryID) {
+    global $dbConn; 
+    
     $sql = "INSERT INTO `all_memes` 
-      (`id`, `line1`, `line2`, `meme_type`, `meme_url`, `create_date`) 
+      (`id`, `line1`, `line2`, `category_id`, `create_date`) 
       VALUES 
-      (NULL, '$line1', '$line2', '$memeType', '$memeURL', NOW());"; 
+      (NULL, '$line1', '$line2', '$categoryID', NOW());"; 
     
     $statement = $dbConn->prepare($sql); 
     $result = $statement->execute(); 
     
-    if (!$result) {
+    return $result; 
+}
+
+function createMeme($line1, $line2, $memeType) {
+    global $dbConn; 
+    
+    $categoryID = getCategoryID($memeType); 
+    $result = insertMeme($line1, $line2, $categoryID); 
+    
+    if (!$result)
       return null; 
-    }
+    
     
     $last_id = $dbConn->lastInsertId();
 
     
     // fetch the newly created object from database
     
-    $sql = "SELECT * from all_memes WHERE id = $last_id"; 
+    $sql = "SELECT 
+        all_memes.line1, 
+        all_memes.line2, 
+        categories.meme_url 
+      FROM all_memes INNER JOIN categories 
+      ON all_memes.category_id = categories.category_id 
+      WHERE all_memes.id = $last_id"; 
+      
+    echo "SQL: $sql <br>"; 
+    
+    
     $statement = $dbConn->prepare($sql); 
     
     $statement->execute(); 

@@ -6,7 +6,7 @@ function getDatabaseConnection() {
     $host = "localhost";
     $username = "root";
     $password = "cst336"; // best practice: define this in a separte file
-    $dbname = "memes"; 
+    $dbname = "memes_v2"; 
     
     // Create connection
     $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
