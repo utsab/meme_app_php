@@ -31,9 +31,9 @@ function insertMeme($line1, $line2, $categoryID) {
     global $dbConn; 
     
     $sql = "INSERT INTO `all_memes` 
-      (`id`, `line1`, `line2`, `category_id`, `create_date`) 
+      (`id`, `line1`, `line2`, `category_id`, `create_date`, `user_id`) 
       VALUES 
-      (NULL, '$line1', '$line2', '$categoryID', NOW());"; 
+      (NULL, '$line1', '$line2', '$categoryID', NOW(), '{$_SESSION['user_id']}');"; 
     
     $statement = $dbConn->prepare($sql); 
     $result = $statement->execute(); 
