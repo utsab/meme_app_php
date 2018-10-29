@@ -36,3 +36,12 @@
 .line2 {
  bottom: 0;
 }
+
+nav a {
+    float: right;
+    text-decoration: none;
+}
+
+.clear {
+    clear: both;
+}
