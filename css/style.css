@@ -37,7 +37,7 @@
  bottom: 0;
 }
 
-nav a {
+nav ul {
     float: right;
     text-decoration: none;
 }
@@ -50,4 +50,17 @@ nav a {
 .error {
     color: red; 
     padding: 10px 10px 10px 0px;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 0 0 20px;
+}
+
+nav a {
+    text-decoration: none; 
 }

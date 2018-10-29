@@ -1,10 +1,15 @@
 <nav>
+    <ul>
 <?php 
         
-    if (isset($_SESSION['user_id']))
-      echo '<a href="logout.php">Log out</a>'; 
-    else 
-      echo '<a href="login.php">Log in</a>'; 
+    if (isset($_SESSION['user_id'])) {
+      echo '<li> <a href="profile.php"> Profile </a> </li> '; 
+      echo '<li> <a href="logout.php">Logout</a></li>'; 
+    }
+    else  
+      echo '<li> <a href="login.php">Login</a></li>'; 
+    
 ?>
+</ul>
 <div class="clear"></div>
 </nav>
