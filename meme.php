@@ -81,7 +81,7 @@ function createMeme($line1, $line2, $memeType) {
 }
 
 function displayMemes() {
-    $dbConn = getDatabaseConnection(); 
+    global $dbConn; 
     
     $sql = "SELECT 
         all_memes.line1, 
