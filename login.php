@@ -11,12 +11,13 @@ function validate($username, $password) {
     
     $dbConn = getDatabaseConnection(); 
     
-    $sql = "SELECT * FROM `users` WHERE username='$username' AND password=SHA('$password')"; 
+    $sql = "SELECT * FROM `users` WHERE username=:username AND password=SHA(:password)"; 
     
-  
+ 
     $statement = $dbConn->prepare($sql); 
     
-    $statement->execute(); 
+    $statement->execute(array(':username' => $username, ':password' => $password));
+    
     $records = $statement->fetchAll(); 
     
     if (count($records) == 1) {
