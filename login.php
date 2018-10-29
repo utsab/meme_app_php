@@ -31,10 +31,6 @@ function validate($username, $password) {
     }
 }
 
-if (isset($_POST['username'])) {
-    validate($_POST['username'], $_POST['password']);  
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +39,15 @@ if (isset($_POST['username'])) {
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
+        <h1> Welcome to the Meme Generator!</h1>
+        
+        
+        <?php 
+            if (isset($_POST['username'])) {
+                validate($_POST['username'], $_POST['password']);  
+            }
+        ?>
+
         <form method="POST">
             Username: <input type="text" name="username"></input> <br/>
             Password: <input type="password" name="password"></input> <br/>

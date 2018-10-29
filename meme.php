@@ -1,7 +1,11 @@
 <?php
 session_start(); 
 
+include 'functions.php'; 
 include 'database.php';
+
+checkLoggedIn(); 
+
 $dbConn = getDatabaseConnection();
 
 // Fetch the category_id from the categories table for the chosen meme type

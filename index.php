@@ -1,5 +1,10 @@
 <?php
   session_start(); 
+  
+  include 'functions.php'; 
+  
+  checkLoggedIn(); 
+  
 ?>
 
 <!DOCTYPE html>
