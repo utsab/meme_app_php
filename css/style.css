@@ -45,3 +45,9 @@ nav a {
 .clear {
     clear: both;
 }
+
+
+.error {
+    color: red; 
+    padding: 10px 10px 10px 0px;
+}
