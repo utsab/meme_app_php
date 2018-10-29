@@ -3,8 +3,11 @@
 session_start();
 
 include 'functions.php'; 
-  
+include 'database.php';
+
 checkLoggedIn(); 
+
+$dbConn = getDatabaseConnection();
 
 
 function displayMemes() {
@@ -17,7 +20,8 @@ function displayMemes() {
       FROM all_memes INNER JOIN categories 
         ON all_memes.category_id = categories.category_id 
       INNER JOIN users 
-        ON all_memes.user_id = user.user_id"; 
+        ON all_memes.user_id = users.user_id
+      WHERE all_memes.user_id = " . $_SESSION['user_id']; 
     
    
     
@@ -52,7 +56,10 @@ function displayMemes() {
     
     <h2>Your memes: </h2>
     
-    <?php displayMemes() ?>
+    <div class="memes-container">
+      <?php displayMemes(); ?>
+      <div style="clear:both"></div>
+    </div>
     
   </body>
 </html>
