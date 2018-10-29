@@ -1,10 +1,8 @@
 <?php
+session_start(); 
+
 include 'database.php';
 $dbConn = getDatabaseConnection();
-
-echo "SERVER: <br/>"; 
-print_r($_SERVER); 
-echo "<br/>"; 
 
 // Fetch the category_id from the categories table for the chosen meme type
 
@@ -134,6 +132,8 @@ if (isset($_POST['line1']) && isset($_POST['line2'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
+    <?php include('navigation.php'); ?>
+    
     <?php if ($memeObj) {  ?>
       <h1>Your Meme</h1>
       <!--The image needs to be rendered for each new meme

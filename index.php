@@ -9,16 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <nav>
-      <?php 
-        
-        if (isset($_SESSION['user_id']))
-          echo '<a href="logout.php">Log out</a>'; 
-        else 
-          echo '<a href="login.php">Log in</a>'; 
-      ?>
-      <div class="clear"></div>
-    </nav>
+    <?php include('navigation.php'); ?>
     <h1>Meme Generator</h1>
     <img height="100px" width="150px" src="https://www.publicdomainpictures.net/pictures/90000/velka/alpaca-chewing.jpg" alt="a-chewing-alpaca">
     <h2>Welcome to my Meme Generator!</h2>
