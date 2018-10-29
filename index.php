@@ -1,4 +1,6 @@
-
+<?php
+  session_start(); 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -8,7 +10,13 @@
   </head>
   <body>
     <nav>
-      <a href="login.php">Log in</a>
+      <?php 
+        
+        if (isset($_SESSION['user_id']))
+          echo '<a href="logout.php">Log out</a>'; 
+        else 
+          echo '<a href="login.php">Log in</a>'; 
+      ?>
       <div class="clear"></div>
     </nav>
     <h1>Meme Generator</h1>
